@@ -10,13 +10,29 @@
 //   .catch((error) => {
 //     console.error("Error:", error);
 //   });
-const delayer = (msg, delay) => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(msg);
-    }, delay);
+// const delayer = (msg, delay) => {
+//   return new Promise((resolve) => {
+//     setTimeout(() => {
+//       resolve(msg);
+//     }, delay);
+//   });
+// };
+// delayer("hello", 2000).then((message) => {
+//   console.log(message);
+// });
+const delayer = (nbr) => {
+  return new Promise((resolve, reject) => {
+    if (nbr % 2 === 0) {
+      resolve("this number is okay");
+    } else {
+      reject("this number is not okay bcz it is odd");
+    }
   });
 };
-delayer("hello", 2000).then((message) => {
-  console.log(message);
-});
+delayer(2)
+  .then((message) => {
+    console.log(message);
+  })
+  .catch((error) => {
+    console.error("Error:", error);
+  });
