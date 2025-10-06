@@ -1,0 +1,188 @@
+body {
+  background-image: url("./assets/images/pattern-lines.svg"),
+    url("./assets/images/background-desktop.png");
+  color: white;
+  background-size: cover, cover;
+  margin: 0;
+  font-family: "Inconsolata", monospace;
+  font-weight: 400;
+}
+.logo {
+  margin-top: 2rem;
+  margin-left: 33rem;
+}
+
+.inputs {
+  /* background-color: black; */
+  margin-left: 32rem;
+  margin-right: 30rem;
+  margin-top: 1rem;
+  height: 300px;
+}
+.lowerInp {
+  margin-top: 10px;
+}
+.lowerInp input {
+  color: white;
+  height: 30px;
+  width: 246px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  background-color: rgba(126, 187, 240, 0.15);
+  border: 1px solid hsla(7, 88%, 67%, 0.274);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(8px);
+  padding-left: 10px;
+}
+.lowerInp button {
+  height: 30px;
+  width: 259px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  border: none;
+  background-color: hsl(7, 71%, 60%);
+}
+h1 {
+  text-align: center;
+  font-size: 50px;
+}
+h2 {
+  text-align: center;
+  font-size: 15px;
+  font-weight: 100;
+  margin-top: 0;
+}
+.headers {
+  margin-left: 15rem;
+  margin-right: 15rem;
+  margin-top: 0;
+}
+.drag-area {
+  color: white;
+  height: 65px;
+  width: 250px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  background-color: rgba(126, 187, 240, 0.144);
+  border: 1px dashed hsla(7, 88%, 67%, 0.274);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(8px);
+  padding-left: 10px;
+}
+.drag-area button {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  height: 2rem;
+  margin-top: 6px;
+  border-radius: 5px;
+  border: 1px solid hsla(7, 88%, 67%, 0.274);
+  background-color: rgba(126, 187, 240, 0.144);
+}
+#upload-label {
+  font-size: 12px;
+  margin-left: 1.5rem;
+}
+.c1 {
+  position: absolute;
+  top: -50px;
+  left: 60px;
+  opacity: 50%;
+}
+.c2 {
+  position: absolute;
+  top: 20rem;
+  left: 50rem;
+  opacity: 50%;
+}
+.sq-btm-desc {
+  position: absolute;
+  height: 300px;
+  width: 500px;
+  bottom: 0;
+  left: 0;
+}
+.sq-btm-descard {
+  position: absolute;
+  height: 300px;
+  width: 500px;
+  bottom: 0;
+  left: 0;
+}
+.sq-line-top {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.head {
+  width: 50%;
+  margin: 0 auto;
+  justify-items: center;
+}
+
+.head p {
+  text-align: center;
+  width: 50%;
+}
+.approved {
+  height: 210px;
+  width: 450px;
+  margin: 0 auto;
+  background-image: url("./assets/images/pattern-ticket.svg");
+  background-size: cover;
+  display: flex;
+}
+.left {
+  width: 380px;
+}
+.card-logo {
+  height: 30px;
+  margin-top: 20px;
+  margin-left: 1rem;
+}
+.time {
+  margin-left: 63px;
+  margin-top: 0px;
+  font-size: 12px;
+}
+.self-info {
+  margin-top: 50px;
+  display: flex;
+  margin-left: 1rem;
+  margin-right: 6rem;
+}
+.avatar {
+  background-color: blue;
+  height: 80px;
+  width: 110px;
+  border-radius: 10px;
+}
+.names {
+  height: 80px;
+  width: 240px;
+  margin-left: 1rem;
+}
+.git {
+  display: flex;
+  margin-top: -20px;
+}
+.code {
+  display: block;
+  font-size: 20px;
+  padding: 0%;
+  margin-left: -85px;
+  transform: rotate(90deg);
+}
+
+.success {
+  display: none;
+}
+.show-succ {
+  display: block;
+}
+.field-hide {
+  display: none;
+}
