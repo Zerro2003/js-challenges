@@ -91,23 +91,50 @@
 //     console.error("Error in one of the promises:", error);
 //   })
 
-const promo = () => {
-  const prom1 = new Promise((resolve) => {
-    setTimeout(() => {
-      resolve("promise 1 resolved");
-    }, 4000);
+// const promo = () => {
+//   const prom1 = new Promise((resolve) => {
+//     setTimeout(() => {
+//       resolve("promise 1 resolved");
+//     }, 4000);
+//   });
+//   const resolver = new Promise((_, reject) => {
+//     setTimeout(() => {
+//       reject("promise took long to respond");
+//     }, 3000);
+//   });
+//   return Promise.race([prom1, resolver])
+//     .then((message) => {
+//       console.log("All promises resolved:", message);
+//     })
+//     .catch((error) => {
+//       console.error("Error in one of the promises:", error);
+//     });
+// };
+// promo();
+
+const transformer = new Promise((resolve) => {
+  let curNum = 1;
+  resolve(curNum);
+});
+transformer
+  .then((num) => {
+    return num * 2;
+  })
+  .then((num) => {
+    console.log(num);
+    return num * 2;
+  })
+  .then((num) => {
+    console.log(num);
+    return num * 2;
+  })
+  .then((num) => {
+    console.log(num);
+    return num * 2;
+  })
+  .then((num) => {
+    console.log(num);
+  })
+  .then(() => {
+    console.log("done");
   });
-  const resolver = new Promise((_, reject) => {
-    setTimeout(() => {
-      reject("promise took long to respond");
-    }, 3000);
-  });
-  return Promise.race([prom1, resolver])
-    .then((message) => {
-      console.log("All promises resolved:", message);
-    })
-    .catch((error) => {
-      console.error("Error in one of the promises:", error);
-    });
-};
-promo();
