@@ -65,28 +65,49 @@
 //     console.error("Error in one of the promises:", error);
 //   });
 
-const prom1 = new Promise((resolve, reject) => {
-  setTimeout(() => {
-    resolve("promise 1 resolved");
-  }, 3000);
-});
+// const prom1 = new Promise((resolve, reject) => {
+//   setTimeout(() => {
+//     resolve("promise 1 resolved");
+//   }, 3000);
+// });
 
-const prom2 = new Promise((resolve, reject) => {
-  setTimeout(() => {
-    resolve("promise 2 resolved");
-  }, 2000);
-});
+// const prom2 = new Promise((resolve, reject) => {
+//   setTimeout(() => {
+//     resolve("promise 2 resolved");
+//   }, 2000);
+// });
 
-const prom3 = new Promise((resolve, reject) => {
-  setTimeout(() => {
-    resolve("promise 3 resolved");
-  }, 1500);
-});
+// const prom3 = new Promise((resolve, reject) => {
+//   setTimeout(() => {
+//     resolve("promise 3 resolved");
+//   }, 1500);
+// });
 
-Promise.race([prom1, prom2, prom3])
-  .then((messages) => {
-    console.log("All promises resolved:", messages);
-  })
-  .catch((error) => {
-    console.error("Error in one of the promises:", error);
+// Promise.race([prom1, prom2, prom3])
+//   .then((messages) => {
+//     console.log("All promises resolved:", messages);
+//   })
+//   .catch((error) => {
+//     console.error("Error in one of the promises:", error);
+//   })
+
+const promo = () => {
+  const prom1 = new Promise((resolve) => {
+    setTimeout(() => {
+      resolve("promise 1 resolved");
+    }, 4000);
   });
+  const resolver = new Promise((_, reject) => {
+    setTimeout(() => {
+      reject("promise took long to respond");
+    }, 3000);
+  });
+  return Promise.race([prom1, resolver])
+    .then((message) => {
+      console.log("All promises resolved:", message);
+    })
+    .catch((error) => {
+      console.error("Error in one of the promises:", error);
+    });
+};
+promo();
