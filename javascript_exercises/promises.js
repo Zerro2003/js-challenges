@@ -139,19 +139,40 @@
 //     console.log("done");
 //   });
 
-const whatToFetch = { name: "mohamed", age: 30 };
-const getUserData = (objt) => {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve(objt);
-    }, 3000);
+// const whatToFetch = { name: "mohamed", age: 30 };
+// const getUserData = (objt) => {
+//   return new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//       resolve(objt);
+//     }, 3000);
+//   });
+// };
+// getUserData(whatToFetch)
+//   .then((output) => {
+//     output.location = "Egypt";
+//     return output;
+//   })
+//   .then((finalOutput) => {
+//     console.log(finalOutput);
+//   });
+const data = function fetchUser() {
+  return new Promise((resolve) => {
+    setTimeout(() => resolve("User data loaded"), 1000);
   });
 };
-getUserData(whatToFetch)
-  .then((output) => {
-    output.location = "Egypt";
-    return output;
-  })
-  .then((finalOutput) => {
-    console.log(finalOutput);
+
+const Upost = function fetchPosts() {
+  return new Promise((_, reject) => {
+    setTimeout(() => reject(" sorryPost did not load"), 3000);
   });
+};
+const trier = Promise.allSettled([data(), Upost()]);
+const fetcher = async () => {
+  try {
+    const check = await trier;
+    console.log(check);
+  } catch (error) {
+    console.error("Error:", error);
+  }
+};
+fetcher();
