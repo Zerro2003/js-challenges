@@ -112,29 +112,46 @@
 // };
 // promo();
 
-const transformer = new Promise((resolve) => {
-  let curNum = 1;
-  resolve(curNum);
-});
-transformer
-  .then((num) => {
-    return num * 2;
+// const transformer = new Promise((resolve) => {
+//   let curNum = 1;
+//   resolve(curNum);
+// });
+// transformer
+//   .then((num) => {
+//     return num * 2;
+//   })
+//   .then((num) => {
+//     console.log(num);
+//     return num * 2;
+//   })
+//   .then((num) => {
+//     console.log(num);
+//     return num * 2;
+//   })
+//   .then((num) => {
+//     console.log(num);
+//     return num * 2;
+//   })
+//   .then((num) => {
+//     console.log(num);
+//   })
+//   .then(() => {
+//     console.log("done");
+//   });
+
+const whatToFetch = { name: "mohamed", age: 30 };
+const getUserData = (objt) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(objt);
+    }, 3000);
+  });
+};
+getUserData(whatToFetch)
+  .then((output) => {
+    output.location = "Egypt";
+    return output;
   })
-  .then((num) => {
-    console.log(num);
-    return num * 2;
-  })
-  .then((num) => {
-    console.log(num);
-    return num * 2;
-  })
-  .then((num) => {
-    console.log(num);
-    return num * 2;
-  })
-  .then((num) => {
-    console.log(num);
-  })
-  .then(() => {
-    console.log("done");
+  .then((finalOutput) => {
+    console.log(finalOutput);
   });
