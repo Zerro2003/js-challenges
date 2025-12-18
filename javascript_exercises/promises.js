@@ -11,6 +11,18 @@
 //     console.error("Error:", error);
 //   });
 
+
+// function calculate(a, b, callback) {
+//   const result = a + b;
+//   callback(result);
+// }
+
+// calculate(2, 3, (res) => {
+//   console.log("Answer:", res);
+// });
+
+
+// // -----------
 // const delayer = (msg, delay) => {
 //   return new Promise((resolve) => {
 //     setTimeout(() => {
@@ -39,31 +51,34 @@
 //     console.error("Error:", error);
 //   });
 
-// const prom1 = new Promise((resolve, reject) => {
-//   setTimeout(() => {
-//     resolve("promise 1 resolved");
-//   }, 1000);
-// });
 
-// const prom2 = new Promise((resolve, reject) => {
-//   setTimeout(() => {
-//     resolve("promise 2 resolved");
-//   }, 2000);
-// });
 
-// const prom3 = new Promise((resolve, reject) => {
-//   setTimeout(() => {
-//     resolve("promise 3 resolved");
-//   }, 1500);
-// });
 
-// Promise.all([prom1, prom2, prom3])
-//   .then((messages) => {
-//     console.log("All promises resolved:", messages);
-//   })
-//   .catch((error) => {
-//     console.error("Error in one of the promises:", error);
-//   });
+const prom1 = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve("promise 1 resolved");
+  }, 1000);
+});
+
+const prom2 = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve("promise 2 resolved");
+  }, 2000);
+});
+
+const prom3 = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve("promise 3 resolved");
+  }, 1500);
+});
+
+Promise.all([prom1, prom2, prom3])
+  .then((messages) => {
+    console.log("All promises resolved:", messages);
+  })
+  .catch((error) => {
+    console.error("Error in one of the promises:", error);
+  });
 
 // const prom1 = new Promise((resolve, reject) => {
 //   setTimeout(() => {
@@ -155,24 +170,24 @@
 //   .then((finalOutput) => {
 //     console.log(finalOutput);
 //   });
-const data = function fetchUser() {
-  return new Promise((resolve) => {
-    setTimeout(() => resolve("User data loaded"), 1000);
-  });
-};
+// const data = function fetchUser() {
+//   return new Promise((resolve) => {
+//     setTimeout(() => resolve("User data loaded"), 1000);
+//   });
+// };
 
-const Upost = function fetchPosts() {
-  return new Promise((_, reject) => {
-    setTimeout(() => reject(" sorryPost did not load"), 3000);
-  });
-};
-const trier = Promise.allSettled([data(), Upost()]);
-const fetcher = async () => {
-  try {
-    const check = await trier;
-    console.log(check);
-  } catch (error) {
-    console.error("Error:", error);
-  }
-};
-fetcher();
+// const Upost = function fetchPosts() {
+//   return new Promise((_, reject) => {
+//     setTimeout(() => reject(" sorryPost did not load"), 3000);
+//   });
+// };
+// const trier = Promise.allSettled([data(), Upost()]);
+// const fetcher = async () => {
+//   try {
+//     const check = await trier;
+//     console.log(check);
+//   } catch (error) {
+//     console.error("Error:", error);
+//   }
+// };
+// fetcher();
