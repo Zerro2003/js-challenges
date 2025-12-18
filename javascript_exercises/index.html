@@ -1,0 +1,49 @@
+<!-- 2. You are given a function that performs an asynchronous operation using a callback.
+
+```jsx
+functionfetchUser(callback) {
+setTimeout(() => {
+const user = {id:1,name:'Adeline' }
+callback(null, user)
+  },1000)
+}
+
+```
+
+### Tasks
+
+Refactor the above function to return a **Promise** instead of using a callback.
+
+1. Using fetchSimulator, simulate fetching data from three different URLs in parallel. Each “fetch” will be represented by a Promise that resolves after a delay taken from the delays array. Use **`Promise.all()`** to wait for all these Promises to resolve and then process the results.
+
+```jsx
+//Input
+const delays = [800, 1200, 1000];
+const apiUrls = [
+  'https://jsonplaceholder.typicode.com/posts/4',
+  'https://jsonplaceholder.typicode.com/posts/5',
+  'https://jsonplaceholder.typicode.com/posts/6'
+];
+
+``` -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body id="body">
+    <script>
+      const theBody = document.getElementById("body");
+      const changeBg = () => {
+        return setInterval(() => {
+          let red = Math.floor(Math.random() * 255);
+          let green = Math.floor(Math.random() * 255);
+          let blue = Math.floor(Math.random() * 255);
+          theBody.style.backgroundColor = `RGB(${red},${green},${blue})`;
+        }, 3000);
+      };
+      changeBg();
+    </script>
+  </body>
+</html>
