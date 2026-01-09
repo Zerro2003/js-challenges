@@ -1,13 +1,3 @@
-// const f = async () => {
-//     let x = new Promise((res,rej)=>{
-//         setTimeout(()=>{
-//             res("done")
-//         },2000)
-//     })
-//     let m = await x
-//     console.log(m)
-// }
-// f()
 
 const g = async () =>{
     try{
