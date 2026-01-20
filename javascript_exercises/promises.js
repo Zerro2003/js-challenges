@@ -11,7 +11,6 @@
 //     console.error("Error:", error);
 //   });
 
-
 // function calculate(a, b, callback) {
 //   const result = a + b;
 //   callback(result);
@@ -20,7 +19,6 @@
 // calculate(2, 3, (res) => {
 //   console.log("Answer:", res);
 // });
-
 
 // // -----------
 // const delayer = (msg, delay) => {
@@ -51,34 +49,31 @@
 //     console.error("Error:", error);
 //   });
 
+// const prom1 = new Promise((resolve, reject) => {
+//   setTimeout(() => {
+//     resolve("promise 1 resolved");
+//   }, 1000);
+// });
 
+// const prom2 = new Promise((resolve, reject) => {
+//   setTimeout(() => {
+//     resolve("promise 2 resolved");
+//   }, 2000);
+// });
 
+// const prom3 = new Promise((resolve, reject) => {
+//   setTimeout(() => {
+//     resolve("promise 3 resolved");
+//   }, 1500);
+// });
 
-const prom1 = new Promise((resolve, reject) => {
-  setTimeout(() => {
-    resolve("promise 1 resolved");
-  }, 1000);
-});
-
-const prom2 = new Promise((resolve, reject) => {
-  setTimeout(() => {
-    resolve("promise 2 resolved");
-  }, 2000);
-});
-
-const prom3 = new Promise((resolve, reject) => {
-  setTimeout(() => {
-    resolve("promise 3 resolved");
-  }, 1500);
-});
-
-Promise.all([prom1, prom2, prom3])
-  .then((messages) => {
-    console.log("All promises resolved:", messages);
-  })
-  .catch((error) => {
-    console.error("Error in one of the promises:", error);
-  });
+// Promise.all([prom1, prom2, prom3])
+//   .then((messages) => {
+//     console.log("All promises resolved:", messages);
+//   })
+//   .catch((error) => {
+//     console.error("Error in one of the promises:", error);
+//   });
 
 // const prom1 = new Promise((resolve, reject) => {
 //   setTimeout(() => {
@@ -191,3 +186,32 @@ Promise.all([prom1, prom2, prom3])
 //   }
 // };
 // fetcher();
+
+async function downloadContents(urls) {
+  const promises = urls.map(async (url) => {
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    return await response.text();
+  });
+
+  return Promise.all(promises);
+}
+
+const urls = [
+  "https://jsonplaceholder.typicode.com/posts/1",
+  "https://jsonplaceholder.typicode.com/posts/2",
+  "https://jsonplaceholder.typicode.com/posts/3",
+];
+
+(async () => {
+  try {
+    const contents = await downloadContents(urls);
+    console.log("Downloaded contents:", contents);
+  } catch (error) {
+    console.log("Error:", error.message);
+  }
+})();
