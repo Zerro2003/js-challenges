@@ -74,29 +74,66 @@
 
 // demoGithubUser();
 
-let theController = new AbortController();
-let signal = theController.signal;
-let myF = async () => {
+// let theController = new AbortController();
+// let signal = theController.signal;
+// let myF = async () => {
+//   try {
+//     let res = await fetch("https://jsonplaceholder.typicode.com/posts/1", {
+//       signal,
+//     });
+//     if (!res.ok) {
+//       throw new Error("this will not be available");
+//     } else {
+//       let data = await res.json();
+//       console.log(data);
+//     }
+//   } catch (err) {
+//     if (err.name === "AbortError") {
+//       console.log("this is taking too long to load");
+//     } else {
+//       console.error(err);
+//     }
+//   }
+// };
+// setTimeout(myF, 3000);
+
+// setTimeout(() => {
+//   theController.abort();
+// }, 1000);
+
+// Fetch 3 APIs sequentially and log results in order, then refactor to
+// fetch them in parallel while preserving order.
+// https://jsonplaceholder.typicode.com/posts/1
+// https://jsonplaceholder.typicode.com/users/1
+// https://jsonplaceholder.typicode.com/comments/1
+
+const getData = async () => {
+  let post = await fetch("https://jsonplaceholder.typicode.com/posts/1");
+  let user = await fetch("https://jsonplaceholder.typicode.com/users/1");
+  let comment = await fetch("https://jsonplaceholder.typicode.com/comments/1");
+  let apiss = [post, user, comment];
   try {
-    let res = await fetch("https://jsonplaceholder.typicode.com/posts/1", {
-      signal,
-    });
-    if (!res.ok) {
-      throw new Error("this will not be available");
-    } else {
-      let data = await res.json();
-      console.log(data);
+    for (let ap of apiss) {
+      let getApi = await ap.json();
+      console.log(getApi);
     }
-  } catch (err) {
-    if (err.name === "AbortError") {
-      console.log("this is taking too long to load");
-    } else {
-      console.error(err);
-    }
+  } catch (error) {
+    console.log("something is not right");
   }
 };
-setTimeout(myF, 3000);
+getData();
 
-setTimeout(() => {
-  theController.abort();
-}, 1000);
+// const getInParal = async () => {
+//   let post = await fetch("https://jsonplaceholder.typicode.com/posts/1");
+//   let user = await fetch("https://jsonplaceholder.typicode.com/users/1");
+//   let comment = await fetch("https://jsonplaceholder.typicode.com/comments/1");
+//   let apis = [post, user, comment];
+//   try {
+//     const data = apis.map((a) => a.json());
+//     const fin = await Promise.all(data);
+//     console.log(fin);
+//   } catch (Error) {
+//     console.log("something is not right");
+//   }
+// };
+// getInParal();
