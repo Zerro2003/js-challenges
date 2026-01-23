@@ -107,33 +107,33 @@
 // https://jsonplaceholder.typicode.com/users/1
 // https://jsonplaceholder.typicode.com/comments/1
 
-const getData = async () => {
-  let post = await fetch("https://jsonplaceholder.typicode.com/posts/1");
-  let user = await fetch("https://jsonplaceholder.typicode.com/users/1");
-  let comment = await fetch("https://jsonplaceholder.typicode.com/comments/1");
-  let apiss = [post, user, comment];
-  try {
-    for (let ap of apiss) {
-      let getApi = await ap.json();
-      console.log(getApi);
-    }
-  } catch (error) {
-    console.log("something is not right");
-  }
-};
-getData();
-
-// const getInParal = async () => {
+// const getData = async () => {
 //   let post = await fetch("https://jsonplaceholder.typicode.com/posts/1");
 //   let user = await fetch("https://jsonplaceholder.typicode.com/users/1");
 //   let comment = await fetch("https://jsonplaceholder.typicode.com/comments/1");
-//   let apis = [post, user, comment];
+//   let apiss = [post, user, comment];
 //   try {
-//     const data = apis.map((a) => a.json());
-//     const fin = await Promise.all(data);
-//     console.log(fin);
-//   } catch (Error) {
+//     for (let ap of apiss) {
+//       let getApi = await ap.json();
+//       console.log(getApi);
+//     }
+//   } catch (error) {
 //     console.log("something is not right");
 //   }
 // };
-// getInParal();
+// getData();
+
+const getInParal = async () => {
+  let post = await fetch("https://jsonplaceholder.typicode.com/posts/1");
+  let user = await fetch("https://jsonplaceholder.typicode.com/users/1");
+  let comment = await fetch("https://jsonplaceholder.typicode.com/comments/1");
+  let apis = [post, user, comment];
+  try {
+    const data = apis.map((a) => a.json());
+    const fin = await Promise.all(data);
+    console.log(fin);
+  } catch (Error) {
+    console.log("something is not right");
+  }
+};
+getInParal();
