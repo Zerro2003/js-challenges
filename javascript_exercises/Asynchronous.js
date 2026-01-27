@@ -123,17 +123,28 @@
 // };
 // getData();
 
-const getInParal = async () => {
-  let post = await fetch("https://jsonplaceholder.typicode.com/posts/1");
-  let user = await fetch("https://jsonplaceholder.typicode.com/users/1");
-  let comment = await fetch("https://jsonplaceholder.typicode.com/comments/1");
-  let apis = [post, user, comment];
-  try {
-    const data = apis.map((a) => a.json());
-    const fin = await Promise.all(data);
-    console.log(fin);
-  } catch (Error) {
-    console.log("something is not right");
-  }
+// const getInParal = async () => {
+//   let post = await fetch("https://jsonplaceholder.typicode.com/posts/1");
+//   let user = await fetch("https://jsonplaceholder.typicode.com/users/1");
+//   let comment = await fetch("https://jsonplaceholder.typicode.com/comments/1");
+//   let apis = [post, user, comment];
+//   try {
+//     const data = apis.map((a) => a.json());
+//     const fin = await Promise.all(data);
+//     console.log(fin);
+//   } catch (Error) {
+//     console.log("something is not right");
+//   }
+// };
+// getInParal();
+
+const xml = new XMLHttpRequest();
+xml.open("GET", "https://jsonplaceholder.typicode.com/posts/1");
+xml.responseType = "json";
+xml.onload = () => {
+  console.log(xml.response);
 };
-getInParal();
+xml.onerror = () => {
+  console.log("bra bra bra");
+};
+xml.send();
