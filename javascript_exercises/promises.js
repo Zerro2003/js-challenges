@@ -187,31 +187,109 @@
 // };
 // fetcher();
 
-async function downloadContents(urls) {
-  const promises = urls.map(async (url) => {
-    const response = await fetch(url);
+// async function downloadContents(urls) {
+//   const promises = urls.map(async (url) => {
+//     const response = await fetch(url);
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
+//     if (!response.ok) {
+//       throw new Error(`HTTP error! Status: ${response.status}`);
+//     }
 
-    return await response.text();
-  });
+//     return await response.text();
+//   });
 
-  return Promise.all(promises);
+//   return Promise.all(promises);
+// }
+
+// const urls = [
+//   "https://jsonplaceholder.typicode.com/posts/1",
+//   "https://jsonplaceholder.typicode.com/posts/2",
+//   "https://jsonplaceholder.typicode.com/posts/3",
+// ];
+
+// (async () => {
+//   try {
+//     const contents = await downloadContents(urls);
+//     console.log("Downloaded contents:", contents);
+//   } catch (error) {
+//     console.log("Error:", error.message);
+//   }
+// })();
+
+// function poke(id) {
+//   fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
+//     .then((res) => {
+//       if (!res.ok) {
+//         throw new Error("oops");
+//       }
+//       return res.json();
+//     })
+//     .then((result) => {
+//       setTimeout(() => {
+//         console.log(result);
+//       }, 5000);
+//     })
+//     .catch((error) => {
+//       console.error(error);
+//     });
+// }
+// poke(4);
+
+// const postIds = [1, 5, ooo];
+
+// // 1. Map IDs to an array of fetch promises
+// const promises = postIds.map((id) =>
+//   fetch(`https://jsonplaceholder.typicode.com/posts/${id}`).then((res) =>
+//     res.json(),
+//   ),
+// );
+
+// // 2. Execute them all at once
+// Promise.all(promises)
+//   .then((results) => {
+//     // 'results' is an array of the 3 post objects
+//     console.log("Post 1:", results[0]);
+//     console.log("Post 5:", results[1]);
+//     console.log("Post 10:", results[2]);
+//   })
+//   .catch((error) => {
+//     // IMPORTANT: If ANY single request fails, the whole thing fails!
+//     console.error("One of the fetches failed!", error);
+//   });
+
+// let myfun = (num) => {
+//   if (num > 5) {
+//     return Promise.reject("sorry dear");
+//   }
+//   return Promise.resolve("the number is " + num);
+// };
+// myfun(4)
+//   .then((msg) => {
+//     console.log(msg);
+//   })
+//   .catch((er) => {
+//     console.log(er);
+//   });
+
+async function fastWay() {
+  try {
+    const userPromise = fetch(
+      "https://jsonplaceholder.typicode.com/users/1",
+    ).then((r) => r.json());
+    const postsPromise = fetch(
+      "https://jsonplaceholder.typicode.com/posts?userId=1",
+    ).then((r) => r.json());
+
+    const [userData, postsData] = await Promise.all([
+      userPromise,
+      postsPromise,
+    ]);
+
+    console.log("User Info:", userData);
+    console.log("User Posts:", postsData);
+  } catch (error) {
+    console.error("Something went wrong:", error);
+  }
 }
 
-const urls = [
-  "https://jsonplaceholder.typicode.com/posts/1",
-  "https://jsonplaceholder.typicode.com/posts/2",
-  "https://jsonplaceholder.typicode.com/posts/3",
-];
-
-(async () => {
-  try {
-    const contents = await downloadContents(urls);
-    console.log("Downloaded contents:", contents);
-  } catch (error) {
-    console.log("Error:", error.message);
-  }
-})();
+fastWay();
