@@ -73,33 +73,26 @@
 // }
 
 // demoGithubUser();
-
-// let theController = new AbortController();
-// let signal = theController.signal;
-// let myF = async () => {
-//   try {
-//     let res = await fetch("https://jsonplaceholder.typicode.com/posts/1", {
-//       signal,
-//     });
-//     if (!res.ok) {
-//       throw new Error("this will not be available");
-//     } else {
-//       let data = await res.json();
-//       console.log(data);
-//     }
-//   } catch (err) {
-//     if (err.name === "AbortError") {
-//       console.log("this is taking too long to load");
-//     } else {
-//       console.error(err);
-//     }
-//   }
-// };
-// setTimeout(myF, 3000);
-
-// setTimeout(() => {
-//   theController.abort();
-// }, 1000);
+let myF = async (time) => {
+  try {
+    let signal = AbortSignal.timeout(time);
+    let post = await fetch("https://jsonplaceholder.typicode.com/posts/1", {
+      signal,
+    });
+    if (!post.ok) {
+      throw new Error("this error caused by time delay");
+    }
+    let data = await post.json();
+    console.log(data);
+  } catch (err) {
+    if (err.name === "TimeoutError") {
+      console.log(`this is taking longer than ${time} seconds`);
+    } else {
+      console.log("please there is error", err.message);
+    }
+  }
+};
+myF(500);
 
 // Fetch 3 APIs sequentially and log results in order, then refactor to
 // fetch them in parallel while preserving order.
@@ -124,7 +117,7 @@
 // getData();
 
 // const getInParal = async () => {
-//   let post = await fetch("https://jsonplaceholder.typicode.com/posts/1");
+//   let post = await fetch("https://dummyjson.com/posts");
 //   let user = await fetch("https://jsonplaceholder.typicode.com/users/1");
 //   let comment = await fetch("https://jsonplaceholder.typicode.com/comments/1");
 //   let apis = [post, user, comment];
@@ -138,13 +131,28 @@
 // };
 // getInParal();
 
-const xml = new XMLHttpRequest();
-xml.open("GET", "https://jsonplaceholder.typicode.com/posts/1");
-xml.responseType = "json";
-xml.onload = () => {
-  console.log(xml.response);
-};
-xml.onerror = () => {
-  console.log("bra bra bra");
-};
-xml.send();
+// const monk = async () => {
+//   let api1 = fetch("https://dummyjson.com/posts");
+//   let api2 = fetch("https://this-may-not-exist.com/posts");
+//   let api3 = fetch("https://jsonplaceholder.typicode.com/posts");
+//   let myM = [api1, api2, api3];
+//   let f = await Promise.any(myM);
+//   const d = await f.json();
+//   console.log(d);
+
+// const mpper = myM.map((a) => a.json());
+// const last = await new Promise.any(mpper);
+// console.log(last);
+// };
+// monk();
+
+// const xml = new XMLHttpRequest();
+// xml.open("GET", "https://jsonplaceholder.typicode.com/posts/1");
+// xml.responseType = "json";
+// xml.onload = () => {
+//   console.log(xml.response);
+// };
+// xml.onerror = () => {
+//   console.log("bra bra bra");
+// };
+// xml.send();
