@@ -94,6 +94,27 @@
 // };
 // myF(500);
 
+// async function myF(time) {
+//   try {
+//     let signal = AbortSignal.timeout(time);
+//     let myApi = await fetch("https://jsonplaceholder.typicode.com/posts/1", {
+//       signal,
+//     });
+//     if (!myApi.ok) {
+//       throw new Error("this might be caused by loss of internet");
+//     }
+//     let theReal = await myApi.json();
+//     console.log(theReal);
+//   } catch (err) {
+//     if (err.name === "TimeoutError") {
+//       console.log(`the fetched api is taking more than ${time} seconds`);
+//     } else {
+//       console.error("error", err.message);
+//     }
+//   }
+// }
+// myF(500);
+
 // fetch("https://jsonplaceholder.typicode.com/posts/1")
 //   .then((ans) => {
 //     if (!ans.ok) {
@@ -157,13 +178,13 @@
 // monk();
 
 // const xml = new XMLHttpRequest();
-// xml.open("GET", "https://jsonplaceholder.typicode.com/posts/1");
+// xml.open("GET", "https://jsonplaceholder.typicode.com/posts/2");
 // xml.responseType = "json";
 // xml.onload = () => {
 //   console.log(xml.response);
 // };
 // xml.onerror = () => {
-//   console.log("bra bra bra");
+//   console.log("something went wrong");
 // };
 // xml.send();
 
@@ -191,24 +212,104 @@
 //   clearInterval(interv);
 // }, 6000);
 
-const myFunc = async (myTime) => {
+// const myFunc = async (myTime) => {
+//   try {
+//     const signal = AbortSignal.timeout(myTime);
+//     const ourData = await fetch(
+//       "https://jsonplaceholder.typicode.com/posts/1",
+//       { signal },
+//     );
+//     if (!ourData.ok) {
+//       throw new Error("sha ibintu byagoranye");
+//     }
+//     const myData = await ourData.json();
+//     console.log(myData);
+//   } catch (err) {
+//     if (err.name === "TimeoutError") {
+//       console.log("well, this is taking soo long to load");
+//     } else {
+//       console.error(err);
+//     }
+//   }
+// };
+// myFunc(10000);
+
+// function getProduct(id) {
+//   return {
+//     id: id,
+//     name: `Awesome Gadget ${id}`,
+//     price: 99.5,
+//   };
+// }
+// let doo = getProduct(2);
+// console.log(`the ${doo.Name} is ${doo.price}`);
+
+// async function getProduct() {
+//   let api1 = fetch("https://dummyjson.com/posts");
+//   let api2 = fetch("https://this-may-not-exist.com/posts");
+//   let api3 = fetch("https://jsonplaceholder.typicode.com/posts");
+//   try {
+//     let among = await Promise.all([api1, api2, api3]);
+//     if (!among.ok) {
+//       throw new Error("hahaha so wrong sacker!!");
+//     }
+//     let amongOther = await among.json();
+//     console.log(amongOther);
+//   } catch (err) {
+//     console.log(err);
+//   }
+// }
+// getProduct();
+
+// async function getFullProfile() {
+//   try {
+//     const [user, post] = await Promise.all([
+//       fetch("https://dummyjson.com/users/1").then((res) => res.json()),
+//       fetch("https://dummyjson.com/users/1/posts").then((res) => res.json()),
+//     ]);
+//     console.log(user, post);
+//   } catch (err) {
+//     console.log("Failed to load profile because one request failed.");
+//   }
+// }
+// getFullProfile();
+
+// async function myFF() {
+//   const abor = new AbortController();
+//   const signal = abor.signal;
+//   try {
+//     const appi = await fetch("https://jsonplaceholder.typicode.com/posts/1", {
+//       signal,
+//     });
+
+//     const data = await appi.json();
+//     console.log(data);
+//   } catch (err) {
+//     if (err.name === "AbortError") {
+//       console.log("error happens");
+//     } else {
+//       console.error("Some other error occurred:", err.message);
+//     }
+//   }
+// }
+
+async function fetchTwoApis() {
+  const urls = [
+    "https://jsonplaceholder.typicode.com/posts/1",
+    "https://jsonplaceholder.typicode.com/users/1",
+  ];
+
   try {
-    const signal = AbortSignal.timeout(myTime);
-    const ourData = await fetch(
-      "https://jsonplaceholder.typicode.com/posts/1",
-      { signal },
-    );
-    if (!ourData.ok) {
-      throw new Error("sha ibintu byagoranye");
-    }
-    const myData = await ourData.json();
-    console.log(myData);
+    const requests = urls.map(async (url) => {
+      const response = await fetch(url);
+      if (!response.ok) throw new Error("Network failed");
+      return response.json();
+    });
+    const results = await Promise.all(requests);
+    console.log(results);
   } catch (err) {
-    if (err.name === "TimeoutError") {
-      console.log("well, this is taking soo long to load");
-    } else {
-      console.error(err);
-    }
+    console.error("One of the fetches failed:", err.message);
   }
-};
-myFunc(10000);
+}
+
+fetchTwoApis();
